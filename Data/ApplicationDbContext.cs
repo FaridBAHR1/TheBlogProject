@@ -1,0 +1,20 @@
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using TheBlogProject.Models;
+
+namespace TheBlogProject.Data
+{
+    public class ApplicationDbContext : IdentityDbContext<BlogUser> //<BlogUser> - updates IdentityUser to BlogUser
+    {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
+
+        //Storing 4 main models
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+    }
+}

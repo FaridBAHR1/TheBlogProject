@@ -1,0 +1,75 @@
+﻿@model IEnumerable<TheBlogProject.Models.Blog>
+
+@{
+    ViewData["Title"] = "Index"; //
+}
+
+<h1>Index</h1> <!--Title-->
+
+<p>
+    <a asp-action="Create">Create New</a> <!-- points to href/asp-action Create - Action : link between View & Controller -->
+</p>
+<table class="table">
+    <!--renders table-->
+    <thead>
+        <!--contains all header data-->
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name) <!-- displays name of the property - model : lambda expression -->
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Updated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageData)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContentType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BlogUser)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var blog in Model)
+        { //Model - references incoming Model: list of Blogs
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => blog.Name) <!-- assigns the value of blog to the variable modelItem -->
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => blog.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => blog.Created)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => blog.Updated)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => blog.ImageData)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => blog.ContentType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => blog.BlogUser.Id)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@blog.Id">Edit</a> |<!-- anchortag : link user clicks on -> edit actions call record ->
+                        asp-route-id : dependent on name of parameter [edit] -> 'at'blog : evaluates value of blog -->
+                    <a asp-action="Details" asp-route-id="@blog.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@blog.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
